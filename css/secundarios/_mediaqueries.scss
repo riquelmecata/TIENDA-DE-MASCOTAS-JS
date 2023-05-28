@@ -1,0 +1,23 @@
+@media (min-width: 768px) {
+    .hero__text {
+        display: inline;
+    }
+
+    .nav li {
+        display: inline;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+    .col {
+        width: 100vw;
+    }
+    .texto__nosotros {
+        padding: 20px;
+        text-align: center;
+    }
+}

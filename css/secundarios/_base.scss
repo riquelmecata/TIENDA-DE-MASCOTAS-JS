@@ -1,0 +1,67 @@
+body {
+    font-family: 'Jost', sans-serif;
+    color: $base-color;
+}
+
+.card {
+    border:0;
+}
+
+.card2 {
+    padding:20px;
+    border:0;
+    text-align: center;
+    align-items: center;
+}
+
+.card2 img{
+    border-radius: 100%;
+    width:100px;
+}
+.header {
+    border-bottom: 1px solid $border-color;
+    padding: 30px;
+}
+
+.cards {
+    margin-top:30px;
+}
+
+
+
+.icons a{
+    margin-right:20px;
+}
+
+.nav2 a{
+    margin-left:40px;
+}
+
+.nosotros__imagen {
+    width: 100%;
+}
+
+.boton__enviar {
+    background-color: $links-bg;
+    color: $links-color;
+}
+
+.hovericons {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.2s ease-out;
+}
+
+.hovericons a{
+    display: block;
+    background-color: white;
+    border-radius: 100%;
+    padding: 10px;
+    display: flex;
+    margin-top: 10px;
+}
+
+.card:hover .hovericons {
+    opacity: 1;
+    margin-left: 10px;
+}

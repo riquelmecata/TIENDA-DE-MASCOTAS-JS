@@ -1,0 +1,36 @@
+.hero {
+    background-image: url("../img/02.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    height:400px;
+    background-size:cover;
+    margin-bottom: 30px;
+    display: flex;
+   align-items: center;
+
+   &__text { 
+    margin-left:40px;
+    display: none;
+   }
+
+   &__title {
+    color: $links-color;
+    width:30%;
+    }
+
+    &__link {
+        background-color:$links-bg;
+        color:$links-color;
+        display: inline-block;
+        padding:10px;
+        margin-top:10px;
+    }
+}
+
+.pagina_productos {
+    background-image: url("../img/10.jpg");
+    }
+
+.pagina_contacto {
+    background-image: url("../img/23.jpg");
+    }
