@@ -1,3 +1,5 @@
+// creacion del array
+
 const productos = [
     {
         id: "perro-01",
@@ -143,8 +145,8 @@ function cargarProductos(productosElegidos) {
 
     contenedorProductos.innerHTML = "";
 
-
-    productosElegidos.forEach( producto => {
+// mostrar todos los productos 
+    productosElegidos.forEach( producto => { // para recorrer todos los productos
         const div = document.createElement("div");
         div.classList.add("producto");
         div.innerHTML = ` 
@@ -171,6 +173,8 @@ function cargarProductos(productosElegidos) {
 }
 
 cargarProductos(productos);
+
+// creamos los filtros / categorias
 
 botonesCategorias.forEach(boton => {
     boton.addEventListener("click", (e) => {
@@ -208,12 +212,14 @@ if (productosEnCarritoLS) {
     productosEnCarrito = [];
 }
 
+// agregar elementos a un array (carrito)
+
 function agregarAlCarrito(e) {
 
     const idBoton = e.currentTarget.id;
     const productoAgregado = productos.find (producto => producto.id === idBoton);
 
-    if(productosEnCarrito.some(producto => producto.id === idBoton)) {
+    if(productosEnCarrito.some(producto => producto.id === idBoton)) { // agregamos la seccion de cantidad 
 
        const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
        productosEnCarrito[index].cantidad++;
@@ -226,7 +232,7 @@ function agregarAlCarrito(e) {
 localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
 
 }
-
+// hacemos que cambie el numerito del carrito
 function actualizarNumerito() {
     let nuevoNumerito = productosEnCarrito.reduce ((acc,producto) => acc + producto.cantidad, 0);
     console.log(nuevoNumerito)

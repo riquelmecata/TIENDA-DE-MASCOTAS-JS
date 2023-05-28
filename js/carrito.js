@@ -1,5 +1,5 @@
 let productosEnCarrito = localStorage.getItem("productos-en-carrito");
-productosEnCarrito = JSON.parse(productosEnCarrito);
+productosEnCarrito = JSON.parse(productosEnCarrito); // mantener productos en el storage
 
 const contenedorCarritoVacio = document.querySelector("#carrito-vacio");
 const contenedorCarritoProductos = document.querySelector("#carrito-productos");
