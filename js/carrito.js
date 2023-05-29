@@ -19,7 +19,7 @@ function cargarProductosCarrito() {
         contenedorCarritoComprado.classList.add("disabled");
     
         contenedorCarritoProductos.innerHTML = "";
-    
+        // mostrar array de productos en carrito
         productosEnCarrito.forEach(producto => {
             const div = document.createElement("div");
             div.innerHTML = `
