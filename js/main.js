@@ -1,139 +1,11 @@
-// creacion del array
+let productos = [];
 
-const productos = [
-    {
-        id: "perro-01",
-        titulo: "ACANA LIGHT & FIT PERRO",
-        imagen: "./img/11.jpg",
-        categoria: {
-            nombre: "Perros",
-            id: "perros"
-        },
-        precio: 48428
-
-    },
-    {
-        id: "perro-02",
-        titulo: "AMITY SP LOW GRAIN SALMON ADULT 4 KG",
-        imagen: "./img/12.jpg",
-        categoria: {
-            nombre: "Perros",
-            id: "perros"
-        },
-        precio: 18990
-
-    },
-    {
-        id: "perro-03",
-        titulo: "BRIT CARE SENSITIVE VENISON & POTATO",
-        imagen: "./img/13.png",
-        categoria: {
-            nombre: "Perros",
-            id: "perros"
-        },
-        precio: 74990
-
-    },
-    {
-        id: "perro-04",
-        titulo: "ROYAL CANIN MINI LIGHT 2.5 KG",
-        imagen: "./img/14.jpg",
-        categoria: {
-            nombre: "Perros",
-            id: "perros"
-        },
-        precio: 28500
-
-    },
-    {
-        id: "gato-01",
-        titulo: "NUTRIENCE GRAIN FREE CAT INDOOR 2,5 KG",
-        imagen: "./img/15.jpg",
-        categoria: {
-            nombre: "Gatos",
-            id: "gatos"
-        },
-        precio: 23990
-
-    },
-    {
-        id: "gato-02",
-        titulo: "ROYAL CANIN FELINE INDOOR 7.5 KG",
-        imagen: "./img/16.png",
-        categoria: {
-            nombre: "Gatos",
-            id: "gatos"
-        },
-        precio: 59000
-
-    },
-    {
-        id: "gato-03",
-        titulo: "BRIT CARE STERILIZED SENSITIVE",
-        imagen: "./img/17.jpg",
-        categoria: {
-            nombre: "Gatos",
-            id: "gatos"
-        },
-        precio: 55990
-
-    },
-    {
-        id: "gato-04",
-        titulo: "ACANA WILD ATLANTIC GATO 4.5 KG",
-        imagen: "./img/18.png",
-        categoria: {
-            nombre: "Gatos",
-            id: "gatos"
-        },
-        precio: 46150
-
-    },
-    {
-        id: "exotico-01",
-        titulo: "BRIT RABBIT JUNIOR",
-        imagen: "./img/19.jpg",
-        categoria: {
-            nombre: "Exoticos",
-            id: "exoticos"
-        },
-        precio: 17990
-
-    },
-    {
-        id: "exotico-02",
-        titulo: "TROPICAN MEZCLA CRIANZA 2 KG",
-        imagen: "./img/20.jpg",
-        categoria: {
-            nombre: "Exoticos",
-            id: "exoticos"
-        },
-        precio: 29460
-
-    },
-    {
-        id: "exotico-03",
-        titulo: "MAZURI AQUATIC TURTLE DIET 340 GR",
-        imagen: "./img/21.jpg",
-        categoria: {
-            nombre: "Exoticos",
-            id: "exoticos"
-        },
-        precio: 16080
-
-    },
-    {
-        id: "exotico-04",
-        titulo: "ALIMENTO PARA CONEJOS BUNNY MIX",
-        imagen: "./img/22.png",
-        categoria: {
-            nombre: "Exoticos",
-            id: "exoticos"
-        },
-        precio: 5490
-
-    }
-]
+fetch("./js/productos.json")
+    .then(response => response.json())
+    .then(data => {
+        productos = data;
+        cargarProductos(productos)
+    })
 
 const contenedorProductos = document.querySelector("#contenedor-productos");
 const botonesCategorias = document.querySelectorAll(".nav-button");
@@ -158,7 +30,7 @@ function cargarProductos(productosElegidos) {
                     <img src="${producto.imagen}" alt="${producto.titulo}" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">${producto.titulo}</p>
-                        <h5 class="card-title">$${producto.precio}</h5>
+                        <h5 class="card-title">$${producto.precio.toLocaleString('es-CL')}</h5>
                         <button class="card-agregar" id="${producto.id}"> Agregar al carrito</button>
                     </div>
                 </div>
@@ -171,8 +43,6 @@ function cargarProductos(productosElegidos) {
     actualizarBotonesAgregar();
 
 }
-
-cargarProductos(productos);
 
 // creamos los filtros / categorias
 
@@ -215,6 +85,22 @@ if (productosEnCarritoLS) {
 // agregar elementos a un array (carrito)
 
 function agregarAlCarrito(e) {
+
+    Toastify({
+        text: "Producto agregado",
+        duration: 3000,
+        destination: "../carrito.html",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#A288A6",
+          color: "#ffffff"
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
 
     const idBoton = e.currentTarget.id;
     const productoAgregado = productos.find (producto => producto.id === idBoton);

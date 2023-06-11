@@ -10,6 +10,8 @@ const botonVaciar = document.querySelector("#carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector("#total");
 const botonComprar = document.querySelector("#carrito-acciones-comprar");
 
+
+
 function cargarProductosCarrito() {
 
     if(productosEnCarrito && productosEnCarrito.length > 0) {      
@@ -37,11 +39,11 @@ function cargarProductosCarrito() {
                 </div>
                 <div class="col precio-producto">
                     <small>Precio</small>
-                    <h3>$${producto.precio}</h3>
+                    <h3>$${producto.precio.toLocaleString('es-CL')}</h3>
                 </div>
                 <div class="col subtotal-producto">
                     <small>Subtotal</small>
-                    <h3>$${producto.precio * producto.cantidad}</h3>
+                    <h3>$${(producto.precio * producto.cantidad).toLocaleString('es-CL')}</h3>
                 </div>
                 <div class="col-auto eliminar-producto">
                     <button class="carrito-producto-borrar" id="${producto.id}"><span class="material-symbols-outlined">delete</span></button>
@@ -84,6 +86,24 @@ function actualizarBotonesEliminar() {
 }
 
  function eliminarDelCarrito(e) {
+
+    Toastify({
+        text: "Producto eliminado",
+        duration: 3000,
+        destination: "../carrito.html",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#A288A6",
+          color: "#ffffff"
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+
+
     let idBoton = e.currentTarget.id;
     const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
     productosEnCarrito.splice(index, 1);
@@ -94,14 +114,34 @@ function actualizarBotonesEliminar() {
 
 botonVaciar.addEventListener("click", vaciarCarrito);
 function vaciarCarrito() {
-    productosEnCarrito.length = 0;
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Se borrarán todos tus productos",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#A288A6',
+        cancelButtonColor: '#A9A9A9',
+        confirmButtonText: 'Sí, vaciar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            productosEnCarrito.length = 0;
     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
     cargarProductosCarrito();
+          Swal.fire({
+            title: '¡Listo!',
+            text: "Tu carrito está vacío",
+            icon: 'success',
+            confirmButtonColor: '#A288A6'}
+          )
+        }
+      })
+    
 }
 
 function actualizarTotal() {
     const totalCalculado = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
-    total.innerText = `$${totalCalculado}`;
+    total.innerText = `$${totalCalculado.toLocaleString('es-CL')}`;
 }
 
 botonComprar.addEventListener("click", comprarCarrito);
